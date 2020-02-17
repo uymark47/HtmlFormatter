@@ -1,0 +1,36 @@
+<div class="form-container">
+  <form [formGroup]="editorForm" class="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Rank</mat-label>
+      <input formControlName="rank" type="number" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Body</mat-label>
+      <textarea formControlName="body" matInput></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>link</mat-label>
+      <input formControlName="link" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>source</mat-label>
+      <input formControlName="source" matInput>
+    </mat-form-field>
+    <div appearance="fill" *ngIf="editorForm.value['source'] === 'Vientiane Times'">
+      <mat-checkbox formControlName="paywall">Paywall</mat-checkbox>
+    </div>
+  </form>
+  <div class="button" *ngIf="!selectedData">
+    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+  </div>
+  <div class="button" *ngIf="selectedData">
+    <button mat-flat-button color="primary" (click)="update()">Update</button>
+  </div>
+  <div class="button" style="align-self: flex-end;">
+    <button mat-flat-button color="warn" (click)="clear()">Clear Data</button>
+  </div>
+</div>

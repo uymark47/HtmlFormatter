@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 640px;
+}
+
+.list:hover {
+  background-color: grey;
+  cursor: pointer;
+}
