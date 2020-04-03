@@ -1,6 +1,6 @@
 <div *ngIf="editorService.dataBank.length > 0" cdkDropList class="example-list" (cdkDropListDropped)="editorService.drop($event)">
   <mat-list role="list" class="list" *ngFor="let item of editorService.dataBank; let i = index" cdkDrag>
-    <mat-list-item role="listitem">{{item.title}}</mat-list-item>
+    <mat-list-item [matTooltip]="item.body" role="listitem">{{item.title}} - {{item.source}}</mat-list-item>
     <div style="display: flex; flex-direction: row; margin: auto">
       <button mat-flat-button style="margin: 5px; padding: 5px;" color="primary" (click)="edit(i, item)">Update</button>
       <button mat-flat-button style="margin: 5px;" color="warn" (click)="delete(i, item)">Clear Data</button>

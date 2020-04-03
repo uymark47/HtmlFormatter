@@ -18,12 +18,13 @@ export class EditorComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private editorService: EditorService,
+    public editorService: EditorService,
   ) {
     this.setUpForm();
   }
 
   ngOnInit() {
+    this.editorService.countSources();
     this.editorService.selectData.subscribe((res: EditNews) => {
       this.selectedData = res.news;
       this.index = res.index;

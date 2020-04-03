@@ -10,7 +10,8 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Body</mat-label>
-      <textarea formControlName="body" matInput></textarea>
+      <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5" formControlName="body"
+        matInput></textarea>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>link</mat-label>
@@ -32,5 +33,9 @@
   </div>
   <div class="button" style="align-self: flex-end;">
     <button mat-flat-button color="warn" (click)="clear()">Clear Data</button>
+  </div>
+  <hr>
+  <div *ngFor="let source of editorService.newsSources; let i = index">
+    {{ i + 1 }}. {{ source.source }} - {{ source.count }}
   </div>
 </div>

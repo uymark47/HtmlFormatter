@@ -24,9 +24,15 @@ export class EditNews {
   index: number;
 }
 
+export class SourceCount {
+  source: string;
+  count: number = 0;
+}
+
 export class EditorService {
   dataBank: News[] = [];
   selectData: EventEmitter<EditNews> = new EventEmitter<EditNews>();
+  newsSources: SourceCount[] = [];
 
   constructor(@Inject(SESSION_STORAGE) private storage: StorageService) { }
 
@@ -34,7 +40,9 @@ export class EditorService {
     this.selectData.emit({ index, news: item});
   }
 
-  addNews(data: News) {
+  async addNews(data: News) {
+    data.body = data.body.trim();
+    data.title = data.title.trim();
     if (data.rank && data.rank > 0) {
       data.rank -= 1;
       this.dataBank.splice(data.rank, 0, data);
@@ -42,9 +50,10 @@ export class EditorService {
       this.dataBank.push(data);
     }
     this.formatDataBank();
+    this.countSources();
   }
 
-  edit(data: News, index) {
+  async edit(data: News, index) {
     this.dataBank[index] = data;
     if (data.rank && data.rank > 0) {
       this.dataBank = [
@@ -54,6 +63,7 @@ export class EditorService {
       data.rank -= 1;
       this.dataBank.splice(data.rank, 0, data);
     }
+    this.countSources();
     this.formatDataBank();
   }
 
@@ -87,6 +97,7 @@ export class EditorService {
 
   clearItems() {
     this.dataBank = [];
+    this.newsSources = [];
     this.storage.remove('current');
   }
 
@@ -103,12 +114,27 @@ export class EditorService {
     if (items && items.length > 0) {
       this.dataBank = items;
     }
+    this.countSources();
     this.formatDataBank();
   }
 
   getItem(i: number) {
     return this.dataBank[i];
   }
+
+  countSources() {
+    this.newsSources = [];
+    for (const news of this.dataBank) {
+      const sourceIndex = _.findIndex(this.newsSources, { source: news.source });
+      if (sourceIndex < 0) {
+        const newSource : SourceCount = {
+          source: news.source,
+          count: 1
+        }
+        this.newsSources.push(newSource);
+      } else {
+        this.newsSources[sourceIndex].count += 1;
+      }
+    }
+  }
 }
-
-

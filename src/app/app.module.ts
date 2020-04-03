@@ -17,6 +17,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatListModule } from '@angular/material/list';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     StorageServiceModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   entryComponents: [EditorComponent],
   providers: [EditorService],
