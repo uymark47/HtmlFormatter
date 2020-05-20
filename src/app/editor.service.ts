@@ -1,7 +1,7 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import * as _ from 'lodash';
-import { SESSION_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { StorageService, LOCAL_STORAGE } from 'ngx-webstorage-service';
 import Swal from 'sweetalert2';
 import * as shuffle from 'shuffle-array';
 
@@ -35,7 +35,7 @@ export class EditorService {
   selectData: EventEmitter<EditNews> = new EventEmitter<EditNews>();
   newsSources: SourceCount[] = [];
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {}
 
   select(index: number, item: News) {
     this.selectData.emit({ index, news: item });
