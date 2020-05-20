@@ -19,7 +19,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>source</mat-label>
-      <input formControlName="source" matInput>
+      <input type="url" formControlName="source" matInput>
     </mat-form-field>
     <div appearance="fill" *ngIf="editorForm.value['source'] === 'Vientiane Times'">
       <mat-checkbox formControlName="paywall">Paywall</mat-checkbox>
