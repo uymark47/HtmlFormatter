@@ -6,7 +6,7 @@
                 Rank: {{item.rank}}. {{item.title}}
             </div>
             <div mat-line>
-                {{item.source}}
+                {{item.source}} {{ item.paywall ? '-' : '' }} <span style="color: red">{{ item.paywall ? ' Paywall' : '' }}</span>
             </div>
             <div style="display: flex; flex-direction: row; margin: auto">
                 <button mat-flat-button style="margin: 5px; padding: 5px;" color="primary" (click)="edit(i, item)">Update</button>

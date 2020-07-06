@@ -5,11 +5,27 @@
 }
 
 .form {
+  background-color: #FEF6DF;
   display: flex;
   flex-direction: column;
   max-width: 640px;
+  border: 3px solid rgba(0, 0, 0, .5);
+  border-radius: 8px;
+  padding: 24px;
 }
 
 .button {
-  margin-top: 8px;
+  margin-top: 16px;
+}
+
+.radio-container {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-group {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
 }

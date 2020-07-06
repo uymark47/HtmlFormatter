@@ -1,40 +1,76 @@
 <div class="form-container">
   <form [formGroup]="editorForm" class="form">
-    <mat-form-field appearance="fill">
+    <div class="radio-container">
       <mat-label>Rank</mat-label>
-      <input formControlName="rank" type="number" matInput>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
+      <!-- <input formControlName="rank" type="number" matInput> -->
+      <mat-radio-group
+        color="primary"
+        class="radio-group"
+        formControlName="rank"
+        aria-label="Select an option"
+      >
+        <mat-radio-button [value]="1">1</mat-radio-button>
+        <mat-radio-button [value]="2">2</mat-radio-button>
+        <mat-radio-button [value]="3">3</mat-radio-button>
+        <mat-radio-button [value]="4">4</mat-radio-button>
+        <mat-radio-button [value]="5">5</mat-radio-button>
+        <mat-radio-button [value]="6">6</mat-radio-button>
+        <mat-radio-button [value]="7">7</mat-radio-button>
+        <mat-radio-button [value]="0">0</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <mat-form-field appearance="standard">
       <mat-label>Title</mat-label>
-      <input formControlName="title" matInput>
+      <input formControlName="title" matInput />
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="standard">
       <mat-label>Body</mat-label>
-      <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5" formControlName="body"
-        matInput></textarea>
+      <textarea
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="5"
+        formControlName="body"
+        matInput
+      ></textarea>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="standard">
       <mat-label>link</mat-label>
-      <input formControlName="link" matInput>
+      <input formControlName="link" matInput />
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="standard">
       <mat-label>source</mat-label>
-      <input type="url" formControlName="source" matInput>
+      <input type="text" formControlName="source" matInput />
+
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredSources | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
+
     <div appearance="fill">
       <mat-checkbox formControlName="paywall">Paywall</mat-checkbox>
     </div>
+    <div class="button" *ngIf="!selectedData">
+      <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+    </div>
+    <div class="button" *ngIf="selectedData">
+      <button mat-flat-button color="primary" (click)="update()">Update</button>
+    </div>
   </form>
-  <div class="button" *ngIf="!selectedData">
+  <!-- <div class="button" *ngIf="!selectedData">
     <button mat-flat-button color="primary" (click)="submit()">Submit</button>
   </div>
   <div class="button" *ngIf="selectedData">
     <button mat-flat-button color="primary" (click)="update()">Update</button>
-  </div>
+  </div> -->
   <div class="button" style="align-self: flex-end;">
     <button mat-flat-button color="warn" (click)="clear()">Clear Data</button>
   </div>
-  <hr>
+  <hr />
   <div *ngFor="let source of editorService.newsSources; let i = index">
     {{ i + 1 }}. {{ source.source }} - {{ source.count }}
   </div>
